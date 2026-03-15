@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Maximum Output Movies</title>
+
+<style>
+
+:root{
+--bg:#0e0e0e;
+--card:#181818;
+--input:#111;
+--text:#ffffff;
+--border:#2b2b2b;
+--result:#121212;
+}
+
+.light{
+--bg:#f4f4f4;
+--card:#ffffff;
+--input:#f0f0f0;
+--text:#111;
+--border:#d6d6d6;
+--result:#fafafa;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:system-ui,-apple-system,Segoe UI,Roboto;
+transition:.25s;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* landing */
+
+#landing{
+position:fixed;
+width:100%;
+height:100%;
+background:var(--bg);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:1000;
+animation:fadeOut 2.2s forwards;
+}
+
+.logo{
+font-size:34px;
+font-weight:600;
+letter-spacing:2px;
+opacity:0;
+animation:logoFade 1.2s forwards;
+}
+
+@keyframes logoFade{
+0%{opacity:0;transform:scale(.9);}
+100%{opacity:1;transform:scale(1);}
+}
+
+@keyframes fadeOut{
+0%,80%{opacity:1;}
+100%{opacity:0;visibility:hidden;}
+}
+
+/* navbar */
+
+nav{
+height:64px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 24px;
+background:var(--card);
+border-bottom:1px solid var(--border);
+border-radius:0 0 28px 28px;
+}
+
+nav h2{
+font-size:18px;
+font-weight:600;
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.sub{
+opacity:.35;
+font-size:14px;
+}
+
+/* toggle */
+
+.switch{
+position:relative;
+display:inline-block;
+width:50px;
+height:26px;
+}
+
+.switch input{
+opacity:0;
+width:0;
+height:0;
+}
+
+.slider{
+position:absolute;
+cursor:pointer;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:#444;
+border-radius:34px;
+}
+
+.slider:before{
+position:absolute;
+content:"";
+height:20px;
+width:20px;
+left:3px;
+bottom:3px;
+background:white;
+border-radius:50%;
+transition:.3s;
+}
+
+input:checked + .slider{
+background:#666;
+}
+
+input:checked + .slider:before{
+transform:translateX(24px);
+}
+
+/* layout */
+
+.main{
+flex:1;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+/* card */
+
+.card{
+width:100%;
+max-width:560px;
+background:var(--card);
+border:1px solid var(--border);
+border-radius:40px;
+padding:40px;
+box-shadow:0 20px 60px rgba(0,0,0,.2);
+}
+
+.title{
+font-size:26px;
+margin-bottom:22px;
+}
+
+/* search */
+
+.search{
+display:flex;
+background:var(--input);
+border:1px solid var(--border);
+border-radius:30px;
+overflow:hidden;
+}
+
+.search input{
+flex:1;
+border:none;
+outline:none;
+background:none;
+color:var(--text);
+padding:16px;
+font-size:15px;
+}
+
+.search button{
+background:var(--card);
+border:none;
+color:var(--text);
+padding:0 26px;
+cursor:pointer;
+border-left:1px solid var(--border);
+}
+
+/* results */
+
+#results{
+margin-top:24px;
+}
+
+.result{
+background:var(--result);
+border:1px solid var(--border);
+border-radius:22px;
+padding:15px;
+margin-bottom:12px;
+}
+
+.result a{
+color:var(--text);
+text-decoration:none;
+display:block;
+}
+
+/* footer */
+
+footer{
+text-align:center;
+padding:18px;
+font-size:13px;
+color:gray;
+border-top:1px solid var(--border);
+border-radius:28px 28px 0 0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="landing">
+<div class="logo">Maximum Output Movies</div>
+</div>
+
+<nav>
+
+<h2>
+Maximum Output Movies
+<span class="sub">Movie Search</span>
+</h2>
+
+<label class="switch">
+<input type="checkbox" onclick="toggleTheme()">
+<span class="slider"></span>
+</label>
+
+</nav>
+
+<div class="main">
+
+<div class="card">
+
+<div class="title">Search Movies</div>
+
+<div class="search">
+
+<input id="search" placeholder="Type movie name...">
+
+<button onclick="searchSites()">Search</button>
+
+</div>
+
+<div id="results"></div>
+
+</div>
+
+</div>
+
+<footer>
+©copyright Aditya all rights reserved
+</footer>
+
+<script>
+
+/* theme */
+
+function toggleTheme(){
+document.body.classList.toggle("light")
+}
+
+/* enter key */
+
+document.getElementById("search").addEventListener("keypress",function(e){
+if(e.key==="Enter"){
+searchSites()
+}
+})
+
+/* search */
+
+function searchSites(){
+
+let q=document.getElementById("search").value.trim()
+
+if(q===""){
+document.getElementById("results").innerHTML=""
+return
+}
+
+q=encodeURIComponent(q)
+
+let sites=[
+
+"https://moviebox.ph/web/searchResult?keyword=",
+"https://uhdmovies.ink/search/",
+"https://new4.hdhub4u.fo/search.html?q=",
+"https://new1.cinemalux.foo/?s=",
+"https://worldfree4u.ist/?s="
+
+]
+
+let names=[
+
+"Search on MovieBox",
+"Search on UHDMovies",
+"Search on HDHub4u",
+"Search on CinemaLux",
+"Search on WorldFree4u"
+
+]
+
+let output=""
+
+for(let i=0;i<sites.length;i++){
+
+output+=`
+<div class="result">
+<a target="_blank" href="${sites[i]+q}">
+${names[i]}
+</a>
+</div>
+`
+
+}
+
+document.getElementById("results").innerHTML=output
+
+}
+
+</script>
+
+</body>
+</html>

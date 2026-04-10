@@ -1,0 +1,16 @@
+{
+  "name": "NineRopes Hub",
+  "short_name": "NineRopes",
+  "description": "Premium Entertainment Search Engine",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#E50914",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3669/3669483.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

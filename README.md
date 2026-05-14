@@ -17,32 +17,11 @@
 ## 🔎 How to Use
 
 1. Open the live website  
+- [NineRopes](https://adityaverse0.github.io/NineRopes-Movies/)
 2. Enter the movie name in the search bar  
 3. Press **Search** or hit **Enter**  
 4. Click any link to go directly to the movie search page on that platform  
 
-**Currently supported platforms:**
-
-- [MovieBox](https://moviebox.ph/web/searchResult?keyword=)  
-- [UHDMovies](https://uhdmovies.ink/search/)  
-- [HDHub4u](https://new4.hdhub4u.fo/search.html?q=)  
-- [CinemaLux](https://new1.cinemalux.foo/?s=)  
-- [WorldFree4u](https://worldfree4u.ist/?s=)
-
----
-
-## 📸 Screenshots
-
-**Landing Page:**  
-![Landing](https://via.placeholder.com/600x300?text=Landing+Animation)
-
-**Search UI (Dark Mode):**  
-![Dark Mode](https://via.placeholder.com/600x400?text=Dark+Mode+Search)
-
-**Search UI (Light Mode):**  
-![Light Mode](https://via.placeholder.com/600x400?text=Light+Mode+Search)
-
----
 
 ## ⚡ Future Improvements
 
